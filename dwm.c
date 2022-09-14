@@ -293,6 +293,7 @@ struct Pertag {
 	unsigned int sellts[LENGTH(tags) + 1]; /* selected layouts */
 	const Layout *ltidxs[LENGTH(tags) + 1][2]; /* matrix of tags and layouts indexes  */
 	int showbars[LENGTH(tags) + 1]; /* display bar for the current tag */
+	Gap gaps[LENGTH(tags) + 1]; /* gaps for the current tag */
 };
 
 /* compile-time check if all tags fit into an unsigned int bit array. */
@@ -680,6 +681,7 @@ createmon(void)
 		m->pertag->sellts[i] = m->sellt;
 
 		m->pertag->showbars[i] = m->showbar;
+		m->gap_copy(&m->pertag->gaps[i], m->gap);
 	}
 
 	return m;
@@ -1549,7 +1551,7 @@ gap_copy(Gap *to, const Gap *from)
 void
 setgaps(const Arg *arg)
 {
-	Gap *p = selmon->gap;
+	Gap *p = &selmon->pertag->gaps[selmon->pertag->curtag];
 	switch(arg->i)
 	{
 		case GAP_TOGGLE:
@@ -1752,18 +1754,18 @@ tile(Monitor *m) {
 	if (n > m->nmaster)
 		mw = m->nmaster ? m->ww * m->mfact : 0;
 	else
-		mw = m->ww - m->gap->gappx;
-	for (i = 0, my = ty = m->gap->gappx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+		mw = m->ww - m->pertag->gaps[m->pertag->curtag].gappx;
+	for (i = 0, my = ty = m->pertag->gaps[m->pertag->curtag].gappx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
-			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - m->gap->gappx;
-			resize(c, m->wx + m->gap->gappx, m->wy + my, mw - (2*c->bw) - m->gap->gappx, h - (2*c->bw), 0);
-			if (my + HEIGHT(c) + m->gap->gappx < m->wh)
-				my += HEIGHT(c) + m->gap->gappx;
+			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - m->pertag->gaps[m->pertag->curtag].gappx;
+			resize(c, m->wx + m->pertag->gaps[m->pertag->curtag].gappx, m->wy + my, mw - (2*c->bw) - m->pertag->gaps[m->pertag->curtag].gappx, h - (2*c->bw), 0);
+			if (my + HEIGHT(c) + m->pertag->gaps[m->pertag->curtag].gappx < m->wh)
+				my += HEIGHT(c) + m->pertag->gaps[m->pertag->curtag].gappx;
 		} else {
-			h = (m->wh - ty) / (n - i) - m->gap->gappx;
-			resize(c, m->wx + mw + m->gap->gappx, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gap->gappx, h - (2*c->bw), 0);
-			if (ty + HEIGHT(c) + m->gap->gappx < m->wh)
-				ty += HEIGHT(c) + m->gap->gappx;
+			h = (m->wh - ty) / (n - i) - m->pertag->gaps[m->pertag->curtag].gappx;
+			resize(c, m->wx + mw + m->pertag->gaps[m->pertag->curtag].gappx, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->pertag->gaps[m->pertag->curtag].gappx, h - (2*c->bw), 0);
+			if (ty + HEIGHT(c) + m->pertag->gaps[m->pertag->curtag].gappx < m->wh)
+				ty += HEIGHT(c) + m->pertag->gaps[m->pertag->curtag].gappx;
 		}
 }
 
