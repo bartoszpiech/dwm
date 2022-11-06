@@ -681,7 +681,7 @@ createmon(void)
 		m->pertag->sellts[i] = m->sellt;
 
 		m->pertag->showbars[i] = m->showbar;
-		m->gap_copy(&m->pertag->gaps[i], m->gap);
+		gap_copy(&m->pertag->gaps[i], m->gap);
 	}
 
 	return m;
