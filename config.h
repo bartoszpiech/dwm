@@ -5,16 +5,17 @@ static const unsigned int borderpx	= 1;				/* border pixel of windows */
 static const Gap default_gap		= {.isgap = 1, .realgap = 20, .gappx = 20};
 static const unsigned int snap		= 32;			 /* snap pixel */
 static const int showbar			= 1;				/* 0 means no bar */
-static const int topbar				= 1;				/* 0 means bottom bar */
+static const int topbar				= 0;				/* 0 means bottom bar */
 static const char *fonts[]			= {
-		"Noto Sans Mono:size=10",
+		"Fantasque Sans Mono:pixelsize=16:antialias=true:autohint=true",
+		//"Noto Sans Mono:size=10",
 		"Noto Color Emoji:style=Regular",
 		"Font Awesome 6 Brands Regular:style=Regular",
 		"Font Awesome 6 Free Solid:style=Solid",
 		"Font Awesome v4 Compatibility Regular:style=Regular",
 		"Font Awesome 6 Free Regular:style=Regular",
 };
-static const char dmenufont[]			= "Noto Sans Mono:size=10";
+static const char dmenufont[]			= "Fantasque Sans Mono:pixelsize=16:antialias=true:autohint=true";
 
 static const char col_gray1[]			= "#222222";
 static const char col_gray2[]			= "#444444";
