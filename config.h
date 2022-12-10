@@ -7,7 +7,7 @@ static const unsigned int snap		= 32;			 /* snap pixel */
 static const int showbar			= 1;				/* 0 means no bar */
 static const int topbar				= 0;				/* 0 means bottom bar */
 static const char *fonts[]			= {
-		"Fantasque Sans Mono:pixelsize=16:antialias=true:autohint=true",
+		"Fantasque Sans Mono:pixelsize=14:antialias=true:autohint=true",
 		//"Noto Sans Mono:size=10",
 		"Noto Color Emoji:style=Regular",
 		"Font Awesome 6 Brands Regular:style=Regular",
@@ -23,7 +23,7 @@ static const char col_gray3[]			= "#bbbbbb";
 static const char col_gray4[]			= "#eeeeee";
 static const char col_cyan[]			= "#005577";
 //static const char col_cyan[]			= "#222222";
-static const unsigned int baralpha = 150;
+static const unsigned int baralpha = 0;
 //static const unsigned int baralpha = OPAQUE;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]			= {
